@@ -81,17 +81,19 @@ If the request is invalid, the server will return an error. It might look someth
 
 ```json
 {
-  "meta" : {
+  "http_meta" : {
     "code" : 401,
     "message" : "Unauthorized"
   },
   "error" : {
     "type" : "sleak-error",
-    "code" : "invalid_digest", // one of the Sleak error codes
-    "message" : "The digest you provided was not valid." // anything you want
+    "code" : "invalid_digest",
+    "message" : "The digest you provided was not valid."
   }
 }
 ```
+
+*The `erorr.message` can be anything you want.*
 
 #### Error Codes
 
