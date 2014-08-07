@@ -124,7 +124,7 @@ class Sleak {
   }
 
   public function run($fatal = true) {
-    handleSleakAuth(
+    return handleSleakAuth(
       array_keys_to_lower(getallheaders())[SLEAK_Authorization_Key],
       array_keys_to_lower(getallheaders())[SLEAK_App_Id_Key],
       (bool) $fatal

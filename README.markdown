@@ -30,6 +30,13 @@ x-sleak-application-id: <application-id>
 ## Usage
 An example of how to use Sleak.
 
+### Libraries
+Here is a list of libraries for Sleak:
+
+1. [SleakPHP](http://github.com/jasonsilberman/sleak-auth/blob/master/SleakPHP) by [Jason Silberman](http://github.com/jasonsilberman). SleakPHP is a sever library written in PHP.
+
+You can also check out some of the included [examples](http://github.com/jasonsilberman/sleak-auth/blob/master/examples/).
+
 ### Token Set Up
 Each client gets an `application-id` and a `priate-key`. The `application-id` is sent with every request to identify the client. The `private-key` is used to sign the authentication digest.
 
