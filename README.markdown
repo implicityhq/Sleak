@@ -1,7 +1,7 @@
 Sleak Auth
 ==========
 
-A new way to authenticate REST API requests.
+A new RESTful authentication protocol.
 
 ## Alpha
 Sleak is still in the very early alpha stages. I am currently building an app around Sleak.
@@ -12,16 +12,10 @@ OAuth is great, but complicated. There are many OAuth SDKs out there, each one a
 ## Design
 Sleak is designed to make sure the API request is coming from who they say they are. It is not a way to encrypt or secure the data being sent with the request. Sleak is partially based on this [article](http://www.thebuzzmedia.com/designing-a-secure-rest-api-without-oauth-authentication/).
 
-## Usage
-An example of how to use Sleak.
-
-### Token Set Up
-Each client gets an `application-id` and a `priate-key`. The `application-id` is sent with every request to identify the client. The `private-key` is used to sign the authentication digest.
-
-### Client Code
+### Headers
 When making an authenticated request to the server, the client includes an `Authorization` header.
 
-The `Authorization` header looks something like this:
+The `Authorization` header or "Sleak header" looks something like this:
 
 ```
 Authorization: Sleak <diget>, auth_nonce="<nonce>", auth_timestamp="<timestamp>"
@@ -32,6 +26,15 @@ Each request also sends an `x-sleak-application-id` header:
 ```
 x-sleak-application-id: <application-id>
 ```
+
+## Usage
+An example of how to use Sleak.
+
+### Token Set Up
+Each client gets an `application-id` and a `priate-key`. The `application-id` is sent with every request to identify the client. The `private-key` is used to sign the authentication digest.
+
+### Client Code
+Here is some of the code required to use Sleak on the client.
 
 #### Auth Digest
 The digest sent along with each request is hashed representation of the request params, application id, timestamp, and nonce.
