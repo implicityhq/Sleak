@@ -4,7 +4,7 @@ Sleak Auth
 A new RESTful authentication protocol.
 
 ## Alpha
-Sleak is still in the very early alpha stages. I am currently building an app around Sleak.
+Sleak is still in the very early alpha stages. I am currently building an app around Sleak. This means Sleak is still changing. Feel free to submit bug reports and pull requests to better improved Sleak.
 
 ## Why
 OAuth is great, but complicated. There are many OAuth SDKs out there, each one a little different. I wanted to create a simple, but secure, API authentication protocol.
