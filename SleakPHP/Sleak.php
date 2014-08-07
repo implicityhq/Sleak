@@ -124,9 +124,9 @@ class Sleak {
   }
 
   public function run($fatal = true) {
-    return handleSleakAuth(
-      array_keys_to_lower(getallheaders())[SLEAK_Authorization_Key],
-      array_keys_to_lower(getallheaders())[SLEAK_App_Id_Key],
+    return $this->handleAuth(
+      array_keys_to_lower(getallheaders())[self::SLEAK_Authorization_Key],
+      array_keys_to_lower(getallheaders())[self::SLEAK_App_Id_Key],
       (bool) $fatal
     );
   }
@@ -175,9 +175,9 @@ class Sleak {
 
     $params = normalizeParameterData($requestVars);
     ksort($params);
-    $params[SLEAK_App_Id_Key] = $applicationId;
-    $params[SLEAK_Timestamp_Key] = $timestamp;
-    $params[SLEAK_Nonce_Key] = $nonce;
+    $params[self::SLEAK_App_Id_Key] = $applicationId;
+    $params[slef::SLEAK_Timestamp_Key] = $timestamp;
+    $params[slef::SLEAK_Nonce_Key] = $nonce;
 
     $paramString = http_build_query($params);
     $hmacData = hash_hmac('sha256', $paramString, $privateKey);
