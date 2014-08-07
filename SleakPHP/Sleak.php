@@ -53,7 +53,7 @@ function normalizeParameterData($array) {
       if (preg_match('/([^a-zA-Z0-9\-\_])/', $k)) {
         unset($array[$k]);
       } else if ($v === 0) {
-        $array[$k] = false;
+        $array[$k] = false; 
       }
     }
     return $array;
