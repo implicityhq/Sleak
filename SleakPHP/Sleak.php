@@ -75,7 +75,7 @@ class SleakException extends Exception {
 
 class SleakResponse {
   public $ok, // Bool
-         $errorCode, // string (already_used|invalid_digest)
+         $errorCode, // string (already_used|invalid_digest|unabled_to_complete)
          $message; // string
 
   public function __construct($ok = true, $errorCode = null, $message = null) {
@@ -159,12 +159,21 @@ class Sleak {
 
     $privateKey = call_user_func_array($this->privateKeyCallback, [$applicationId]);
 
-    if ((! $privateKey ) || (empty($privateKey))) {
-      throw new SleakException('Invalid private key provided.', SleakException::SLEAK_User_Error);
-      return null;
+    $requestVars = null;
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      $requestVars = $_POST;
+    } else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+      $requestVars = $_GET;
+    } else {
+      if ($fatal) {
+        throw new SleakException('Invalid request method.', SleakException::SLEAK_User_Error);
+      }
+
+      return (new SleakResponse(false, 'unabled_to_complete', 'Invalid request method.'));
     }
 
-    $params = normalizeParameterData($_GET);
+    $params = normalizeParameterData($requestVars);
     ksort($params);
     $params[SLEAK_App_Id_Key] = $applicationId;
     $params[SLEAK_Timestamp_Key] = $timestamp;
