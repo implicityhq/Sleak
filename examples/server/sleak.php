@@ -1,8 +1,8 @@
 <?
 
 define('SLEAK_App_Id_Key', 'x-sleak-application-id');
-define('SLEAK_Timestamp_Key', 'x-sleak-timestamp-key');
-define('SLEAK_Nonce_Key', 'x-sleak-nonce-key');
+define('SLEAK_Timestamp_Key', 'x-sleak-timestamp');
+define('SLEAK_Nonce_Key', 'x-sleak-nonce');
 define('SLEAK_Scheme', 'Sleak');
 
 header('Content-Type: application/json');
@@ -49,9 +49,7 @@ function printSleakError($message, $code) {
   exit;
 }
 
-function handleSleakAuth() {
-    $completeAuthHeader = array_keys_to_lower(getallheaders())['authorization'];
-    $applicationId = array_keys_to_lower(getallheaders())[SLEAK_App_Id_Key];
+function handleSleakAuth($completeAuthHeader, $applicationId) {
 
     $authHeaderParts = explode(',', $completeAuthHeader);
     $authHeader = array_shift($authHeaderParts);
@@ -78,7 +76,7 @@ function handleSleakAuth() {
 
     $params = normalizeParameterData($_GET);
     ksort($params);
-    $params[SLEAK_App_Id_Key] = $privateKey;
+    $params[SLEAK_App_Id_Key] = $applicationId;
     $params[SLEAK_Timestamp_Key] = $timestamp;
     $params[SLEAK_Nonce_Key] = $nonce;
 
@@ -88,8 +86,11 @@ function handleSleakAuth() {
       return printSleakError('Invalid Digest', 'invalid_digest');
     } else {
       // Successful. Execute Command
-      print json_decode('Success');
+      print 'Success';
     }
 }
 
-handleSleakAuth();
+handleSleakAuth(
+  array_keys_to_lower(getallheaders())['authorization'],
+  array_keys_to_lower(getallheaders())[SLEAK_App_Id_Key]
+  );

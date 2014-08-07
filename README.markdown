@@ -51,13 +51,15 @@ $params['x-sleak-application-id'] = APP_ID; // set the application id
 $params['x-sleak-timestamp'] = time(); // set the current UTC timestamp
 $params['x-sleak-nonce'] = createRandomString(8); // random generate a 8 character string
 
-$unhashedDigest = http_build_query($params); // URL encode the params array
+$unhashedDigest = http_build_query($params); // form encode the params array
 ```
 
 **Note:** The initial request parameters are alphabetically sorted.
 
+**Note:** The parameters should be `application/x-www-form-urlencoded` according to: [http://www.w3.org/TR/html401/interact/forms.html#h-17.13.4.1](http://www.w3.org/TR/html401/interact/forms.html#h-17.13.4.1). 
+
 #### Auth Hashing
-Once you have your URL encoded request parameters. You need to hash them using your `private-key`. ***They should be hashed using HMAC-SHA256.***
+Once you have your form encoded request parameters. You need to hash them using your `private-key`. ***They should be hashed using HMAC-SHA256.***
 
 In PHP, it might look like this:
 
@@ -72,7 +74,7 @@ When the server receives the request from the client. It will collect the reques
 
 Next, the server will look up the nonce and timestamp, to make sure they have not been used before. If they have been used, it will reject (see "[Error Handling](#error-handling)") the request. If they are new, it will insert them into the look up table (probably a database) and continue with the request.
 
-After we have our parameters and we know the request has not been already submitted, we will URL encode the parameters. Then the server will HMAC-SHA256 hash the parameters using the previously looked up the `private-key`.
+After we have our parameters and we know the request has not been already submitted, we will form encode the parameters. Then the server will HMAC-SHA256 hash the parameters using the previously looked up the `private-key`.
 
 The last step is comparing the server generated digest and the one provided in the `Authorization` header. If they are the same, the server will continue and execute the request, otherwise it will reject the request.
 
