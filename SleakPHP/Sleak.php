@@ -99,9 +99,12 @@ class Sleak {
 
   protected $privateKeyCallback, $fetchReplayCallback, $insertReplayCallback;
 
-  public function __construct($privateKeyCallback) {
-    $this->privateKeyCallback = $privateKeyCallback;
-    return $this;
+  public function setPrivateKeyLookupCallback($lookupCallback) {
+    if (is_callable($lookupCallback)) {
+      $this->setPrivateKeyLookupCallback = $lookupCallback;
+    } else {
+      throw new SleakException('Invalid private key lookup callback provided.', SleakException::SLEAK_User_Error);
+    }
   }
 
   public function setFetchReplayCallback($replayCallback) {
@@ -154,14 +157,7 @@ class Sleak {
 
     $authData = normalizeAuthenticationData(implode('', $authParts));
 
-    $privateKey = null;
-
-    if (is_callable($this->privateKeyCallback)) {
-      $privateKey = call_user_func_array($this->privateKeyCallback, [$applicationId]);
-    } else {
-      throw new SleakException('Invalid private key callback provided.', SleakException::SLEAK_User_Error);
-      return null;
-    }
+    $privateKey = call_user_func_array($this->privateKeyCallback, [$applicationId]);
 
     if ((! $privateKey ) || (empty($privateKey))) {
       throw new SleakException('Invalid private key provided.', SleakException::SLEAK_User_Error);
