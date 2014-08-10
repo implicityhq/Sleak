@@ -10,6 +10,7 @@ Using SleakPHP is pretty simple:
 
 ```php
 $sleak = new Sleak();
+
 $sleak->setPrivateKeyLookupCallback(function ($applicationId) {
   return PRIVATE_KEY; // look up private key using $applicationId
 });

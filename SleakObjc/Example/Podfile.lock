@@ -1,0 +1,10 @@
+PODS:
+  - OrderedDictionary (1.1.1)
+
+DEPENDENCIES:
+  - OrderedDictionary
+
+SPEC CHECKSUMS:
+  OrderedDictionary: aedfe4b61c0642f18820fa05f5367d1d2147d82d
+
+COCOAPODS: 0.33.1

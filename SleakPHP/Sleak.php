@@ -101,7 +101,7 @@ class Sleak {
 
   public function setPrivateKeyLookupCallback($lookupCallback) {
     if (is_callable($lookupCallback)) {
-      $this->setPrivateKeyLookupCallback = $lookupCallback;
+      $this->privateKeyCallback = $lookupCallback;
     } else {
       throw new SleakException('Invalid private key lookup callback provided.', SleakException::SLEAK_User_Error);
     }
@@ -176,8 +176,8 @@ class Sleak {
     $params = normalizeParameterData($requestVars);
     ksort($params);
     $params[self::SLEAK_App_Id_Key] = $applicationId;
-    $params[slef::SLEAK_Timestamp_Key] = $timestamp;
-    $params[slef::SLEAK_Nonce_Key] = $nonce;
+    $params[self::SLEAK_Timestamp_Key] = $timestamp;
+    $params[self::SLEAK_Nonce_Key] = $nonce;
 
     $paramString = http_build_query($params);
     $hmacData = hash_hmac('sha256', $paramString, $privateKey);
