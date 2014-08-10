@@ -33,9 +33,10 @@ An example of how to use Sleak.
 ### Libraries
 Here is a list of libraries for Sleak:
 
-1. [SleakPHP](http://github.com/jasonsilberman/sleak-auth/blob/master/SleakPHP) by [Jason Silberman](http://github.com/jasonsilberman). SleakPHP is a sever library written in PHP.
+1. [SleakPHP](http://github.com/Sleak/SleakPHP) by [Jason Silberman](http://github.com/jasonsilberman). SleakPHP is a sever library written in PHP.
+2. [SleakObjc](http://github.com/Sleak/SleakObjc) by [Jason Silberman](http://github.com/jasonsilberman). SleakObjc is a client library written in Objective-C.
 
-You can also check out some of the included [examples](http://github.com/jasonsilberman/sleak-auth/blob/master/examples/).
+You can also check out some of the included [examples](http://github.com/Sleak/spec/blob/master/examples/).
 
 ### Token Set Up
 Each client gets an `application-id` and a `priate-key`. The `application-id` is sent with every request to identify the client. The `private-key` is used to sign the authentication digest.
@@ -120,4 +121,4 @@ Here are some error codes you should return:
 If you see a security hole or want to add something, please submit a pull request.
 
 ## License
-Sleak is licensed under the MIT license (see [LICENSE](http://github.com/jasonsilberman/sleak-auth/blob/master/LICENSE)).
+Sleak is licensed under the MIT license (see [LICENSE](http://github.com/Sleak/spec/blob/master/LICENSE)).
