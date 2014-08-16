@@ -1,13 +1,13 @@
 Sleak Auth
 ==========
 
-A new RESTful authentication protocol.
+A RESTful request signing protocol.
 
 ## Alpha
 Sleak is still in the very early alpha stages. I am currently building an app around Sleak. This means Sleak is still changing. Feel free to submit bug reports and pull requests to better improved Sleak.
 
 ## Why
-OAuth is great, but complicated. There are many OAuth SDKs out there, each one a little different. I wanted to create a simple, but secure, API authentication protocol.
+OAuth is great when you are developing an API that is going to be released to the public. It can be a bit much when you are developing a private API however.
 
 ## Design
 Sleak is designed to make sure the API request is coming from who they say they are. It is not a way to encrypt or secure the data being sent with the request. Sleak is partially based on this [article](http://www.thebuzzmedia.com/designing-a-secure-rest-api-without-oauth-authentication/).
