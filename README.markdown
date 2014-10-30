@@ -114,6 +114,7 @@ Here are some error codes you should return:
 
 | Code | Meaning |
 |------|---------|
+| invalid_request| The request was invalid in another way besides the digest and/or nonce and token. |
 | invalid_digest | The digest the server generated was the not same one the client provided. |
 | already_used | The nonce and token sent in the request have already been used. |
 
